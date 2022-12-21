@@ -2,18 +2,49 @@ const tab_of_nodes=[{lon:52.2007456, lat:22.1184492},{lon:52.1998836, lat:22.124
 //ostatni węzeł zapisany 9349819872
 
 
+//funkcja zwracająca odległość między dwoma punktami
+let i;
+let point1;
+let point2;
+
+
+
+let distance = function(){
+    const radius = 6371;
+    const lat1 = point1.latitude*(Math.PI/180);
+    const lat2 = point2.latitude*(Math.PI/180);
+    const lon1 = point1.longitude*(Math.PI/180);
+    const lon2 = point2.longitude*(Math.PI/180);
+
+    const deltaLat = lat2 - lat1;
+    const deltaLon = lon2 - lon1;
+
+    const a = Math.sin(deltaLat/2) * Math.sin(deltaLat/2) + Math.cos(lat1) * Math.cos(lat2) * Math.sin(deltaLon/2) * Math.sin(deltaLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+    return radius * c;
+}
+
+
+
 //pętla tworząca linie z poszczególnych punktów
-let x=52.1983405;
+let total=0;
+let x;
 let y;
 for (i=0; i<tab_of_nodes.length-1; i++)
-    {
-        x<=tab_of_nodes[i].lon && x>tab_of_nodes[i+1].lon /*&& y>=tab_of_nodes[i].lat && y<tab_of_nodes[i+1].lat*/?y=(tab_of_nodes[i+1].lat-tab_of_nodes[i].lat)/(tab_of_nodes[i+1].lon-tab_of_nodes[i].lon)*(x-tab_of_nodes[i].lon)+tab_of_nodes[i].lat:null;
+    {   x=tab_of_nodes[i].lon;
+        y=tab_of_nodes[i].lat;
+
+        x<=tab_of_nodes[i].lon && x>tab_of_nodes[i+1].lon && y>=tab_of_nodes[i].lat && y<tab_of_nodes[i+1].lat?y=(tab_of_nodes[i+1].lat-tab_of_nodes[i].lat)/(tab_of_nodes[i+1].lon-tab_of_nodes[i].lon)*(x-tab_of_nodes[i].lon)+tab_of_nodes[i].lat:null;
+
+        point1 = {latitude:tab_of_nodes[i].lat, longitude:tab_of_nodes[i].lon};
+        point2 = {latitude:tab_of_nodes[i+1].lat, longitude:tab_of_nodes[i+1].lon};
+
+        total = total+distance();
+        console.log(distance());
+        
     }
 
 
-
-
-
-
-console.log(tab_of_nodes[15].lon);
-console.log(y);
+total = Math.round(total*1000)/1000;
+console.log('Całkowita długość drogi wynosi: '+total+' km');
