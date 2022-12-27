@@ -38,7 +38,7 @@ let distance = function(){
 let total=0;
 let x = position.coords.latitude;
 let y = position.coords.longitude;
-let accu = position.coords.accuracy;
+let accu = position.coords.accuracy.toFixed(2);
 let k;
 let popr = 1.00004;
 
