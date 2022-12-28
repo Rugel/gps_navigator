@@ -74,7 +74,7 @@ for (i=0; i<tab_of_nodes.length-1; i++){
     point2 = {latitude:x, longitude:y};
     total = total + popr*distance();
     //console.log(distance());
-    total = Math.round(total*1000)/1000;
+    total = total.toFixed(3);
     let km = total.toString().replace('.',' + ');
    // console.log('Całkowita długość drogi wynosi:'+total+' km');
     document.getElementById('odczyt').innerHTML = km;
