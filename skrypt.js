@@ -4,9 +4,25 @@ const tab_of_nodes=[{lat:52.2007456, lon:22.1184492},{lat:52.1998836, lon:22.124
 //lokalizacja 
 function lokalizuj(){
 
+    const options = {
+        enableHighAccuracy:true,
+        timeout: 5000,
+        maximumAge:1000
+    };
+
+    function error(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+        document.getElementById('info').innerHTML = '<br/>Wystąpił jakiś błąd lub strona nie ma dostępu do Twojej lokalizacji &#x1F62D'
+    };
+
     if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(showPosition);
-    }
+        navigator.geolocation.getCurrentPosition(showPosition, error, options);
+    } else{
+        document.getElementById('info').innerHTML = '<br/>Twoja przeglądarka lub urządzenie nie obsługuje funkcji lokalizacji &#x1F62D'
+    };
+
+    
+
     function showPosition(position){
        // console.log(position);
 //funkcja zwracająca odległość między dwoma punktami 
@@ -42,10 +58,6 @@ let accu = position.coords.accuracy.toFixed(2);
 let k;
 let popr = 1.00004;
 
-
-
-
-
 for (i=0; i<tab_of_nodes.length-1; i++){  
          point1 = {latitude:tab_of_nodes[i].lat, longitude:tab_of_nodes[i].lon};
         point2 = {latitude:tab_of_nodes[i+1].lat, longitude:tab_of_nodes[i+1].lon};
@@ -63,8 +75,9 @@ for (i=0; i<tab_of_nodes.length-1; i++){
     total = total + popr*distance();
     //console.log(distance());
     total = Math.round(total*1000)/1000;
+    let km = total.toString().replace('.',' + ');
    // console.log('Całkowita długość drogi wynosi:'+total+' km');
-    document.getElementById('odczyt').innerHTML = total;
+    document.getElementById('odczyt').innerHTML = km;
     document.getElementById('dok').innerHTML = accu;
 }
 
