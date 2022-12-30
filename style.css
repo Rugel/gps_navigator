@@ -34,5 +34,6 @@ button{
     width: 600px;
     height: 500px;
     flex-grow: 1.5;
-    margin:20px
+    margin:20px;
+    margin-top: 50px;
 }
