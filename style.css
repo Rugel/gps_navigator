@@ -6,7 +6,7 @@
 
 #content{
     width: 600px;
-    height: 400px;
+    height: auto;
     text-align: center;
     font-weight: bold;
     font-size: 32px;
@@ -35,5 +35,4 @@ button{
     height: 500px;
     flex-grow: 1.5;
     margin:20px;
-    margin-top: 50px;
 }
