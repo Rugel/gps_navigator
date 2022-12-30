@@ -79,9 +79,14 @@ for (i=0; i<tab_of_nodes.length-1; i++){
    // console.log('Całkowita długość drogi wynosi:'+total+' km');
     document.getElementById('odczyt').innerHTML = km;
     document.getElementById('dok').innerHTML = accu;
+
+    var map = L.map('map').setView([x, y], 18);
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
 }
 
 };
-
 
 

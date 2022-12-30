@@ -5,11 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=0.65">
     <title>A2 Siedlce</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
 </head>
 <body>
-    <div id="contener"><div><h3>Budowa A2 Gręzów - Swoboda</h3></div><button onclick="lokalizuj()">Lokalizuj</button><div id="info"><h3>km <span  id="odczyt"> ............</span></h3><p class="normal">dokładność pomiaru lokalizacji: <span id="dok">.......</span> m</p></div><p class="obj">* w celu osiągnięcia najlepszej możliwej dokładności odczyt należy wykonać na prawej stronie projektowej ciągu głównego</p></div>
-<script src="skrypt.js"></script>    
+    <div id="contener"><div id="content"><div><h3>Budowa A2 Gręzów - Swoboda</h3></div><button onclick="lokalizuj()">Lokalizuj</button><div id="info"><h3>km <span  id="odczyt"> ............</span></h3><p class="normal">dokładność pomiaru lokalizacji: <span id="dok">.......</span> m</p></div><p class="obj">* w celu osiągnięcia najlepszej możliwej dokładności odczyt należy wykonać na prawej stronie projektowej ciągu głównego</p></div>
+    <div id='map'></div></div>
+<script src="skrypt.js"></script>   
+
 </body>
 </html>
