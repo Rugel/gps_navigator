@@ -84,6 +84,8 @@ for (i=0; i<tab_of_nodes.length-1; i++){
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
+        var marker = L.marker([x, y]).addTo(map);
+        marker.bindPopup("<b>aktuala lokalizacja</b>").openPopup();
 
 }
 
