@@ -86,6 +86,12 @@ for (i=0; i<tab_of_nodes.length-1; i++){
         }).addTo(map);
         var marker = L.marker([x, y]).addTo(map);
         marker.bindPopup("<b>aktuala lokalizacja</b>").openPopup();
+        map.addControl(new L.Control.Fullscreen({
+            title: {
+                'false': 'widok pełnoekranowy',
+                'true': 'wyjdź z widoku pełnoekranowego'
+            }
+        }));
 
 }
 

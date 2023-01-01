@@ -10,7 +10,7 @@
     text-align: center;
     font-weight: bold;
     font-size: 32px;
-    margin: 20px;
+    margin: 10px;
 }
 
 button{
@@ -28,11 +28,11 @@ button{
     font-size: 24px;
 }
 .obj{
-    font-size: 16px;
+    font-size: 14px;
 }
 #map{
     width: 600px;
     height: 500px;
     flex-grow: 1.5;
-    margin:20px;
+    margin:10px;
 }
