@@ -4,10 +4,14 @@ var map = L.map('map').setView([52.1713402, 22.1844079], 12);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-        var polygon = L.polygon([[52.2027456, 22.1164492],
+        L.polyline([[52.2027456, 22.1164492],
                                  [52.2027456, 22.2523665],
                                  [52.1399348, 22.2523665],
-                                 [52.1399348, 22.1164492]]).addTo(map);
+                                 [52.1399348, 22.1164492],
+                                 [52.2027456, 22.1164492]]).addTo(map);
+
+         var office = L.marker([52.18811286436958, 22.147333469408157]).addTo(map);
+         office.bindPopup("Biuro Budowy A2 odc.V POLAQUA").openPopup();  
 
  map.addControl(new L.Control.Fullscreen({
             title: {
@@ -15,6 +19,10 @@ var map = L.map('map').setView([52.1713402, 22.1844079], 12);
                 'true': 'wyjdź z widoku pełnoekranowego'
             }
         }));
+
+        for (i=0; i<tab_of_nodes.length-1; i++){  
+            L.polyline([[tab_of_nodes[i].lat, tab_of_nodes[i].lon],[tab_of_nodes[i+1].lat, tab_of_nodes[i+1].lon]], {color:"red"}).addTo(map);
+        }
 
 //lokalizacja 
 function lokalizuj(){
