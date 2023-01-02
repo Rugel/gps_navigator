@@ -80,32 +80,35 @@ let y = position.coords.longitude;
 let accu = position.coords.accuracy.toFixed(2);
 let k;
 
-for (i=0; i<tab_of_nodes.length-1; i++){  
+if(x <= tab_of_nodes[0].lat && x >= tab_of_nodes[tab_of_nodes.length-1].lat && y >= tab_of_nodes[0].lon && y <= tab_of_nodes[tab_of_nodes.length-1].lon){
+
+    for (i=0; i<tab_of_nodes.length-1; i++){  
          point1 = {latitude:tab_of_nodes[i].lat, longitude:tab_of_nodes[i].lon};
         point2 = {latitude:tab_of_nodes[i+1].lat, longitude:tab_of_nodes[i+1].lon};
-//if(x<=tab_of_nodes[i+1].lat&&y>=tab_of_nodes[i+1].lon){
-        total = total+distance();
-        total = total + 0.0002588;
-        console.log(total);
-        k=i;
-     //   }
-       // console.log(k);
-    }
+        if(y>=tab_of_nodes[i+1].lon){
+            total = total+distance();
+            total = total + 0.0002588;
+            k=i;
+                }
+            }
 
-    point1 = {latitude:tab_of_nodes[k+1].lat, longitude:tab_of_nodes[k+1].lon};
-    point2 = {latitude:x, longitude:y};
-    total = total + distance();
-    //console.log(distance());
-    total = total.toFixed(3);
-    let km = total.toString().replace('.',' + ');
-   // console.log('Całkowita długość drogi wynosi:'+total+' km');
-    document.getElementById('odczyt').innerHTML = km;
-    document.getElementById('dok').innerHTML = accu;
-
+            point1 = {latitude:tab_of_nodes[k+1].lat, longitude:tab_of_nodes[k+1].lon};
+            point2 = {latitude:x, longitude:y};
+            total = total + distance();
+            total = total.toFixed(3);
+            let km = total.toString().replace('.',' + ');
+            document.getElementById('odczyt').innerHTML = km;
+        } else{
+            point1 = {latitude:tab_of_nodes[0].lat, longitude:tab_of_nodes[0].lon};
+            point2 = {latitude:x, longitude:y};
+            total = distance().toFixed(3);
+            console.log(total);
+            document.getElementById('h3').innerHTML = `odległość do punktu 0 + 000 wynosi: ${total} km`;
+        }
+     document.getElementById('dok').innerHTML = accu;
      map.flyTo([x, y], 18);
-    
-    var marker = L.marker([x, y]).addTo(map);
-    marker.bindPopup("<b>aktuala lokalizacja</b>").openPopup();
+     var marker = L.marker([x, y]).addTo(map);
+     marker.bindPopup("aktuala lokalizacja").openPopup();
         
 
 }
