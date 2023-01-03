@@ -13,6 +13,12 @@ var map = L.map('map').setView([52.1713402, 22.1844079], 12);
          var office = L.marker([52.18811286436958, 22.147333469408157]).addTo(map);
          office.bindPopup("Biuro Budowy A2 odc.V POLAQUA").openPopup();  
 
+         var km0 = L.marker([52.2007456, 22.1184492]).addTo(map);
+         km0.bindPopup('km 0 + 000').openPopup();
+
+         var km12 = L.marker([52.1419348, 22.2503665]).addTo(map);
+         km12.bindPopup('km 12 + 488').openPopup();
+
  map.addControl(new L.Control.Fullscreen({
             title: {
                 'false': 'widok pełnoekranowy',
@@ -79,6 +85,7 @@ let x = position.coords.latitude;
 let y = position.coords.longitude;
 let accu = position.coords.accuracy.toFixed(2);
 let k;
+const result = document.getElementById('h3');
 
 if(x <= tab_of_nodes[0].lat && x >= tab_of_nodes[tab_of_nodes.length-1].lat && y >= tab_of_nodes[0].lon && y <= tab_of_nodes[tab_of_nodes.length-1].lon){
 
@@ -103,7 +110,10 @@ if(x <= tab_of_nodes[0].lat && x >= tab_of_nodes[tab_of_nodes.length-1].lat && y
             point2 = {latitude:x, longitude:y};
             total = distance().toFixed(3);
             console.log(total);
-            document.getElementById('h3').innerHTML = `odległość do punktu 0 + 000 wynosi: ${total} km`;
+            result.style.color = 'red';
+            result.innerHTML = `odczyt spoza zakresu budowy - odległość do punktu 0 + 000 wynosi: <b>${total}</b> km`;
+            result.style.fontSize = '24px';
+            L.polyline([[tab_of_nodes[0].lat, tab_of_nodes[0].lon],[x, y]], {color:"orange"}).addTo(map);
         }
      document.getElementById('dok').innerHTML = accu;
      map.flyTo([x, y], 18);
