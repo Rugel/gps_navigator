@@ -113,7 +113,12 @@ if(x <= tab_of_nodes[0].lat && x >= tab_of_nodes[tab_of_nodes.length-1].lat && y
             result.style.color = 'red';
             result.innerHTML = `odczyt spoza zakresu budowy - odległość do punktu 0 + 000 wynosi: <b>${total}</b> km`;
             result.style.fontSize = '24px';
-            L.polyline([[tab_of_nodes[0].lat, tab_of_nodes[0].lon],[x, y]], {color:"orange"}).addTo(map);
+            var polyline = L.polyline([[x, y],[tab_of_nodes[0].lat, tab_of_nodes[0].lon]], {color:"orange"}).addTo(map);
+            L.polylineDecorator(polyline, {
+                patterns: [
+               {offset: 0, repeat: 50, symbol: L.Symbol.arrowHead({pixelSize: 20})}
+                          ]
+                           }).addTo(map);
         }
      document.getElementById('dok').innerHTML = accu;
      map.flyTo([x, y], 18);
