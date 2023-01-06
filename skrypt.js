@@ -11,13 +11,13 @@ var map = L.map('map').setView([52.1713402, 22.1844079], 12);
                                  [52.2027456, 22.1164492]]).addTo(map);
 
          var office = L.marker([52.18811286436958, 22.147333469408157]).addTo(map);
-         office.bindPopup("Biuro Budowy A2 odc.V POLAQUA").openPopup();  
-
-         var km0 = L.marker([52.2007456, 22.1184492]).addTo(map);
-         km0.bindPopup('km 0 + 000').openPopup();
+         office.bindPopup("<b>Biuro Budowy A2</b><br/> odc.V POLAQUA").openPopup();  
 
          var km12 = L.marker([52.1419348, 22.2503665]).addTo(map);
-         km12.bindPopup('km 12 + 488').openPopup();
+         km12.bindPopup('<b>koniec odcinka</b><br/>km 12 + 488').openPopup();
+
+         var km0 = L.marker([52.2007456, 22.1184492]).addTo(map);
+         km0.bindPopup('<b>początek odcinka</b><br/>km 0 + 000').openPopup();
 
  map.addControl(new L.Control.Fullscreen({
             title: {
@@ -118,7 +118,7 @@ if(x <= tab_of_nodes[0].lat && x >= tab_of_nodes[tab_of_nodes.length-1].lat && y
      document.getElementById('dok').innerHTML = accu;
      map.flyTo([x, y], 18);
      var marker = L.marker([x, y]).addTo(map);
-     marker.bindPopup("aktuala lokalizacja").openPopup();
+     marker.bindPopup("<b>aktualna lokalizacja<b/>").openPopup();
         
 
 }
