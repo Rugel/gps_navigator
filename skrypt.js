@@ -24,8 +24,9 @@ function lineLenth(latitude, longitude) {
     return subline_length;
 }
 
-//dodanie obrysu lini drogi
-var polygon = L.polygon([[52.201965, 22.118375], [52.199493, 22.137902], [52.201097, 22.138095], [52.200571, 22.142236], [52.198888, 22.142537], [52.195561, 22.15333], [52.182458, 22.163157], [52.172879, 22.161913], [52.165983, 22.170582], [52.162245, 22.187104], [52.152898, 22.202125], [52.146552, 22.211266], [52.146052, 22.231951], [52.143174, 22.250608], [52.141574, 22.250329], [52.141008, 22.220879], [52.144274, 22.203906], [52.147421, 22.196374], [52.159454, 22.178993], [52.163245, 22.164059], [52.171247, 22.151699], [52.188352, 22.145863], [52.199933, 22.118397]]).addTo(map);
+//dodanie prostokąta
+var bounds = [[52.2027456, 22.1144492], [52.1399348, 22.2543665]];
+L.rectangle(bounds, { color: 'blue', weight: 2, fillOpacity: 0 }).addTo(map);
 
 //dodanie markerów do mapy
 var office = L.marker([52.18811286436958, 22.147333469408157]).addTo(map);
@@ -96,7 +97,7 @@ function lokalizuj() {
         let accu = position.coords.accuracy.toFixed(2);
         const result = document.getElementById('h3');
 
-        if (x <= latlngTab[0][1] && x >= latlngTab[latlngTab.length - 1][1] && y >= latlngTab[0][0] && y <= latlngTab[latlngTab.length - 1][0]) {
+        if (x <= latlngTab[0][1] + 0.02 && x >= latlngTab[latlngTab.length - 1][1] - 0.02 && y >= latlngTab[0][0] - 0.02 && y <= latlngTab[latlngTab.length - 1][0] + 0.02) {
 
             let subline_length = lineLenth(x, y);
             document.getElementById('odczyt').innerHTML = subline_length;
@@ -107,10 +108,10 @@ function lokalizuj() {
             result.style.color = 'red';
             result.innerHTML = `odczyt spoza zakresu budowy - odległość do punktu 0 + 000 wynosi: <b>${total}</b> km`;
             result.style.fontSize = '24px';
-            var polyline = L.polyline([[x, y], [latlngTab[0][1], latlngTab[0][0]]], { color: "orange" }).addTo(map);
+            var polyline = L.polyline([[x, y], [latlngTab[0][1], latlngTab[0][0]]], { color: "orange", weight: 1 }).addTo(map);
             L.polylineDecorator(polyline, {
                 patterns: [
-                    { offset: 70, repeat: 80, symbol: L.Symbol.arrowHead({ pixelSize: 20, pathOptions: { fillOpacity: .7, color: 'orange' } }) }
+                    { offset: 70, repeat: 80, symbol: L.Symbol.arrowHead({ pixelSize: 20, pathOptions: { fillOpacity: .5, color: 'orange', weight: 0 } }) }
                 ]
             }).addTo(map);
         }
