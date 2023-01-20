@@ -1,10 +1,10 @@
-#contener{
-    display:flex;
+#contener {
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-#content{
+#content {
     width: 600px;
     height: auto;
     text-align: center;
@@ -13,26 +13,25 @@
     margin: 10px;
 }
 
-button{
+button {
     padding: 20px;
     font-weight: 900;
     font-size: large;
     cursor: pointer;
 }
 
-#odczyt, #dok{
+#odczyt,
+#dok {
     color: red;
 }
 
-.normal{
+.normal {
     font-size: 24px;
 }
-.obj{
-    font-size: 14px;
-}
-#map{
+
+#map {
     width: 600px;
     height: 500px;
     flex-grow: 1.5;
-    margin:10px;
+    margin: 10px;
 }
