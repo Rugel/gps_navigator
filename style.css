@@ -11,6 +11,7 @@
     font-weight: bold;
     font-size: 32px;
     margin: 10px;
+    flex-grow: 1;
 }
 
 button {
@@ -31,7 +32,7 @@ button {
 
 #map {
     width: 600px;
-    height: 600px;
+    height: 60vh;
     flex-grow: 1.5;
     margin: 10px;
 }
