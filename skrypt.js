@@ -121,7 +121,7 @@ function lokalizuj() {
             point2 = { latitude: x, longitude: y };
             total = distance(point1, point2).toFixed(3);
             result.style.color = 'red';
-            result.innerHTML = `odczyt spoza zakresu budowy - odległość do punktu 0 + 000 wynosi: <b>${total}</b> km`;
+            result.innerHTML = `odczyt spoza zakresu budowy - odległość do punktu 0 + 000 wynosi: <mark><b>${total}</b></mark> km`;
             result.style.fontSize = '26px';
             var polyline = L.polyline([[x, y], [latlonP[0][1], latlonP[0][0]]], { color: "orange", weight: 1 }).addTo(map);
             L.polylineDecorator(polyline, {
