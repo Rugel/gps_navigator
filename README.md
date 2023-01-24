@@ -13,3 +13,4 @@
          * [leaflet-polylinedecorator](https://unpkg.com/leaflet-polylinedecorator@1.6.0/dist/leaflet.polylineDecorator.js) - a Leaflet plug-in to define and draw patterns on existing Polylines or along coordinate paths
          * [leaflet-geometryutil](https://npmcdn.com/leaflet-geometryutil) - has many useful functions for geographical measurements on the map
          * [turf](https://unpkg.com/@turf/turf/turf.min.js) - Turf is a modular geospatial analysis engine written in JavaScript. It performs geospatial processing tasks with GeoJSON data and can be run on a server or in a browser. This module is part of the Turfjs project, an open source module collection dedicated to geographic algorithms
+         
