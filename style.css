@@ -32,12 +32,13 @@ button {
 
 #map {
     width: 600px;
-    height: 55vh;
+    height: 600px;
     flex-grow: 1.5;
     margin: 10px;
 }
 mark{
-    background-color: lightgrey;
-    color: blue;
+    background-color: red;
+    opacity: 0.85;
+    color: white;
     padding: 0 20px 0 20px ;
 }
