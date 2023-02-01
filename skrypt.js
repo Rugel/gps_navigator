@@ -39,10 +39,10 @@ L.rectangle(bounds, { color: 'blue', weight: 2, fillOpacity: 0 }).addTo(map);
 var office = L.marker([52.18811286436958, 22.147333469408157]).addTo(map);
 office.bindPopup("<b>Biuro Budowy A2</b><br/> odc.V POLAQUA").openPopup();
 
-var km12 = L.marker([(latlonL[latlonL.length-1][0]+latlonP[latlonP.length-1][0])/2, (latlonL[latlonL.length-1][1]+latlonP[latlonP.length-1][1])/2]).addTo(map);
+var km12 = L.marker([(latlonL[latlonL.length - 1][0] + latlonP[latlonP.length - 1][0]) / 2, (latlonL[latlonL.length - 1][1] + latlonP[latlonP.length - 1][1]) / 2]).addTo(map);
 km12.bindPopup('<b>koniec odcinka</b><br/>km 12 + 489').openPopup();
 
-var km0 = L.marker([(latlonL[0][0]+latlonP[0][0])/2, (latlonL[0][1]+latlonP[0][1])/2]).addTo(map);
+var km0 = L.marker([(latlonL[0][0] + latlonP[0][0]) / 2, (latlonL[0][1] + latlonP[0][1]) / 2]).addTo(map);
 km0.bindPopup('<b>początek odcinka</b><br/>km 0 + 000').openPopup();
 
 map.addControl(new L.Control.Fullscreen({
@@ -121,9 +121,9 @@ function lokalizuj() {
             point2 = { latitude: x, longitude: y };
             total = distance(point1, point2).toFixed(3);
             result.style.color = 'red';
-            result.innerHTML = `odczyt spoza zakresu budowy - odległość do punktu 0 + 000 wynosi: <mark><b>${total}</b></mark> km`;
+            result.innerHTML = `odczyt spoza zakresu budowy - odległość do punktu km 0 + 000 wynosi: <mark><b>${total}</b></mark> km`;
             result.style.fontSize = '26px';
-            var polyline = L.polyline([[x, y], [latlonP[0][1], latlonP[0][0]]], { color: "orange", weight: 1 }).addTo(map);
+            var polyline = L.polyline([[x, y], [(latlonL[0][1] + latlonP[0][1]) / 2, (latlonL[0][0] + latlonP[0][0]) / 2]], { color: "orange", weight: 1 }).addTo(map);
             L.polylineDecorator(polyline, {
                 patterns: [
                     { offset: 70, repeat: 80, symbol: L.Symbol.arrowHead({ pixelSize: 20, pathOptions: { fillOpacity: .5, color: 'orange', weight: 0 } }) }
@@ -143,7 +143,7 @@ function lokalizuj() {
             let subline_length = lineLenth(x, y);
             var popup = L.popup()
                 .setLatLng(popLocation)
-                .setContent(`zapis na lini</br>km ${subline_length}`)
+                .setContent(`zapis na osi</br>km ${subline_length}`)
                 .openOn(map);
         });
 
