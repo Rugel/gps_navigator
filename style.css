@@ -6,7 +6,7 @@
 
 #content {
     width: 600px;
-    height: 350px;
+    height: 375px;
     text-align: center;
     font-weight: bold;
     font-size: 32px;
@@ -47,7 +47,7 @@ mark {
     position: fixed;
     bottom: 0;
     padding: 10px;
-    z-index: 1;
+    z-index: 9999;
     border: solid 1px;
     width: 100%;
     text-align: center;
