@@ -35,9 +35,22 @@ button {
     flex-grow: 1.5;
     margin: 10px;
 }
-mark{
+
+mark {
     background-color: red;
     opacity: 0.85;
     color: white;
-    padding: 0 20px 0 20px ;
+    padding: 0 20px 0 20px;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    padding: 10px;
+    z-index: 1;
+    border: solid 1px;
+    width: 100%;
+    text-align: center;
+    background-color: gray;
+    letter-spacing: 3px;
 }
