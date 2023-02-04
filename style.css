@@ -1,7 +1,14 @@
+*{
+    box-sizing: border-box;
+}
 #contener {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-bottom: 2.5rem;
 }
 
 #content {
@@ -33,7 +40,6 @@ button {
     width: 600px;
     height: 600px;
     flex-grow: 1.5;
-    margin: 10px;
 }
 
 mark {
@@ -44,13 +50,14 @@ mark {
 }
 
 #footer {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     padding: 10px;
     z-index: 9999;
     border: solid 1px;
     width: 100%;
     text-align: center;
-    background-color: gray;
+    background-color: lightgrey;
     letter-spacing: 3px;
+    height: 2.5rem;
 }
