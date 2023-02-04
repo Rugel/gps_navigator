@@ -1,19 +1,21 @@
-*{
+* {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
+
 #contener {
-    position: relative;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    min-height: 97.8vh;
+    min-height: 100vh;
     padding-bottom: 2.5rem;
 }
 
 #content {
     width: 600px;
-    height: 350px;
+    height: 300px;
     text-align: center;
     font-weight: bold;
     font-size: 32px;
@@ -22,6 +24,7 @@
 
 button {
     padding: 20px;
+    margin: 30px;
     font-weight: 900;
     font-size: large;
     cursor: pointer;
@@ -34,11 +37,13 @@ button {
 
 .normal {
     font-size: 24px;
+    line-height: 70px;
 }
 
 #map {
     width: 600px;
     height: 600px;
+    margin: 10px;
     flex-grow: 1.5;
 }
 
