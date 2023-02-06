@@ -73,7 +73,7 @@ function lokalizuj() {
     const options = {
         enableHighAccuracy: true,
         //timeout: 10000,
-        //maximumAge: 1000
+        maximumAge: 1000
     };
 
     function error(err) {
@@ -123,12 +123,14 @@ function lokalizuj() {
             result.style.color = 'red';
             result.innerHTML = `odczyt spoza zakresu budowy - odległość do punktu km 0 + 000 wynosi: <mark><b>${total}</b></mark> km`;
             result.style.fontSize = '26px';
-            var polyline = L.polyline([[x, y], [(latlonL[0][1] + latlonP[0][1]) / 2, (latlonL[0][0] + latlonP[0][0]) / 2]], { color: "orange", weight: 1 }).addTo(map);
-            L.polylineDecorator(polyline, {
-                patterns: [
-                    { offset: 70, repeat: 80, symbol: L.Symbol.arrowHead({ pixelSize: 20, pathOptions: { fillOpacity: .5, color: 'orange', weight: 0 } }) }
-                ]
-            }).addTo(map);
+            if (!polyline||acu>position.coords.accuracy.toFixed(2)) {
+                var polyline = L.polyline([[x, y], [(latlonL[0][1] + latlonP[0][1]) / 2, (latlonL[0][0] + latlonP[0][0]) / 2]], { color: "orange", weight: 1 }).addTo(map);
+                L.polylineDecorator(polyline, {
+                    patterns: [
+                        { offset: 70, repeat: 80, symbol: L.Symbol.arrowHead({ pixelSize: 20, pathOptions: { fillOpacity: .5, color: 'orange', weight: 0 } }) }
+                    ]
+                }).addTo(map);
+            }
         }
         document.getElementById('dok').innerHTML = accu;
         map.flyTo([x, y], 18);
