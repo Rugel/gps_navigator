@@ -104,7 +104,8 @@ function lokalizuj() {
             const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
             return radius * c;
         }
-
+        let polyline;
+        if (polyline) { map.removeLayer(polyline) };
         //pomiary po zlokalizowaniu użytkownika
         let total = 0;
         let x = position.coords.latitude;
@@ -117,10 +118,9 @@ function lokalizuj() {
             let subline_length = lineLenth(x, y);
             document.getElementById('odczyt').innerHTML = subline_length;
         } else {
-            let polyline;
-            if(polyline){map.removeLayer(polyline)};
-            //map.removeLayer(deco); 
             
+            //map.removeLayer(deco); 
+
             point1 = { latitude: latlonP[0][1], longitude: latlonP[0][0] };
             point2 = { latitude: x, longitude: y };
             total = distance(point1, point2).toFixed(3);
@@ -138,7 +138,7 @@ function lokalizuj() {
         map.flyTo([x, y], 18);
         var marker = L.marker([x, y]).addTo(map).bindPopup("<b>aktualna lokalizacja<b/>");
     }
-    
+
     //lokalizacja punktu po kliknięciu
     map.on('click', function (e) {
         var popLocation = e.latlng;
