@@ -65,7 +65,21 @@ for (el in latlonL) {
 }
 var strLineL = turf.lineString(latlonL);
 
+//funkcja zwracająca odległośś między dwoma punktami
+let distance = function (p1, p2) {
+    const radius = 6371;
+    const lat1 = p1.latitude * (Math.PI / 180);
+    const lat2 = p2.latitude * (Math.PI / 180);
+    const lon1 = p1.longitude * (Math.PI / 180);
+    const lon2 = p2.longitude * (Math.PI / 180);
+    const deltaLat = lat2 - lat1;
+    const deltaLon = lon2 - lon1;
+    const a = Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) + Math.cos(lat1) * Math.cos(lat2) * Math.sin(deltaLon / 2) * Math.sin(deltaLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return radius * c;
+}
 
+const result = document.getElementById('h3');
 
 //lokalizacja 
 function lokalizuj() {
@@ -89,38 +103,21 @@ function lokalizuj() {
 
     //callback
     function showPosition(position) {
-        //funkcja zwracająca odległość między dwoma punktami 
         let point1;
         let point2;
-        let distance = function (p1, p2) {
-            const radius = 6371;
-            const lat1 = p1.latitude * (Math.PI / 180);
-            const lat2 = p2.latitude * (Math.PI / 180);
-            const lon1 = p1.longitude * (Math.PI / 180);
-            const lon2 = p2.longitude * (Math.PI / 180);
-            const deltaLat = lat2 - lat1;
-            const deltaLon = lon2 - lon1;
-            const a = Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) + Math.cos(lat1) * Math.cos(lat2) * Math.sin(deltaLon / 2) * Math.sin(deltaLon / 2);
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            return radius * c;
-        }
-        let polyline;
-        if (polyline) { map.removeLayer(polyline) };
         //pomiary po zlokalizowaniu użytkownika
         let total = 0;
         let x = position.coords.latitude;
         let y = position.coords.longitude;
         let accu = position.coords.accuracy.toFixed(2);
-        const result = document.getElementById('h3');
+        
 
         if (x <= latlonP[0][1] + 0.02 && x >= latlonP[latlonP.length - 1][1] - 0.02 && y >= latlonP[0][0] - 0.02 && y <= latlonP[latlonP.length - 1][0] + 0.02) {
 
             let subline_length = lineLenth(x, y);
             document.getElementById('odczyt').innerHTML = subline_length;
-        } else {
-            
-            //map.removeLayer(deco); 
-
+        } 
+        else {
             point1 = { latitude: latlonP[0][1], longitude: latlonP[0][0] };
             point2 = { latitude: x, longitude: y };
             total = distance(point1, point2).toFixed(3);
@@ -137,19 +134,18 @@ function lokalizuj() {
         document.getElementById('dok').innerHTML = accu;
         map.flyTo([x, y], 18);
         var marker = L.marker([x, y]).addTo(map).bindPopup("<b>aktualna lokalizacja<b/>");
+       
     }
-
-    //lokalizacja punktu po kliknięciu
-    map.on('click', function (e) {
-        var popLocation = e.latlng;
-        let x = popLocation.lat;
-        let y = popLocation.lng;
-        let subline_length = lineLenth(x, y);
-        var popup = L.popup()
-            .setLatLng(popLocation)
-            .setContent(`zapis na osi</br>km ${subline_length}`)
-            .openOn(map);
-    });
 };
 
-
+//lokalizacja po kiknięciu
+map.on('click', function (e) {
+    var popLocation = e.latlng;
+    let x = popLocation.lat;
+    let y = popLocation.lng;
+    let subline_length = lineLenth(x, y);
+    var popup = L.popup()
+        .setLatLng(popLocation)
+        .setContent(`zapis na osi</br>km ${subline_length}`)
+        .openOn(map);
+});
