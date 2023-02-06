@@ -117,6 +117,7 @@ function lokalizuj() {
             let subline_length = lineLenth(x, y);
             document.getElementById('odczyt').innerHTML = subline_length;
         } else {
+            if(polyline&&deco){map.removeLayer(polyline); map.removeLayer(deco); map.removeLayer(marker)};
             point1 = { latitude: latlonP[0][1], longitude: latlonP[0][0] };
             point2 = { latitude: x, longitude: y };
             total = distance(point1, point2).toFixed(3);
@@ -129,8 +130,6 @@ function lokalizuj() {
                     { offset: 70, repeat: 80, symbol: L.Symbol.arrowHead({ pixelSize: 20, pathOptions: { fillOpacity: .5, color: 'orange', weight: 0 } }) }
                 ]
             }).addTo(map);
-if(accu > position.coords.accuracy.toFixed(2)){map.removeLayer(polyline); map.removeLayer(deco)};
-
         }
         document.getElementById('dok').innerHTML = accu;
         map.flyTo([x, y], 18);
