@@ -86,7 +86,7 @@ function lokalizuj() {
 
     const options = {
         enableHighAccuracy: true,
-        //timeout: 10000,
+        timeout: 8000,
         maximumAge: 1000
     };
 
@@ -96,7 +96,7 @@ function lokalizuj() {
     };
 
     if (navigator.geolocation) {
-        navigator.geolocation.watchPosition(showPosition, error, options);
+        navigator.geolocation.getCurrentPosition(showPosition, error, options);
     } else {
         document.getElementById('info').innerHTML = '<br/>Twoja przeglądarka lub urządzenie nie obsługuje funkcji lokalizacji &#x1F62D'
     };
@@ -124,7 +124,7 @@ function lokalizuj() {
             result.style.color = 'red';
             result.innerHTML = `odczyt spoza zakresu budowy - odległość do punktu km 0 + 000 wynosi: <mark><b>${total}</b></mark> km`;
             result.style.fontSize = '26px';
-            polyline = L.polyline([[x, y], [(latlonL[0][1] + latlonP[0][1]) / 2, (latlonL[0][0] + latlonP[0][0]) / 2]], { color: "orange", weight: 1 }).addTo(map);
+            const polyline = L.polyline([[x, y], [(latlonL[0][1] + latlonP[0][1]) / 2, (latlonL[0][0] + latlonP[0][0]) / 2]], { color: "orange", weight: 1 }).addTo(map);
             var deco = L.polylineDecorator(polyline, {
                 patterns: [
                     { offset: 70, repeat: 80, symbol: L.Symbol.arrowHead({ pixelSize: 20, pathOptions: { fillOpacity: .5, color: 'orange', weight: 0 } }) }
@@ -133,9 +133,11 @@ function lokalizuj() {
         }
         document.getElementById('dok').innerHTML = accu;
         map.flyTo([x, y], 18);
-        var marker = L.marker([x, y]).addTo(map).bindPopup("<b>aktualna lokalizacja<b/>");
-       
+        let marker = L.circle([x, y]).addTo(map).bindPopup("<b>aktualna lokalizacja<b/>"); 
     }
+   
+   
+    
 };
 
 //lokalizacja po kiknięciu
