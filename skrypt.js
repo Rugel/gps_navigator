@@ -72,17 +72,17 @@ function lokalizuj() {
 
     const options = {
         enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 1000
+        //timeout: 10000,
+        //maximumAge: 1000
     };
 
     function error(err) {
         console.warn(`ERROR(${err.code}): ${err.message}`);
-        document.getElementById('info').innerHTML = '<br/>Wystąpił jakiś błąd lub strona nie ma dostępu do Twojej lokalizacji &#x1F62D'
+        document.getElementById('info').innerHTML = `<br/>wystąpił błąd nr ${err.code} : <span style="color:red">${err.message}</span>`
     };
 
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, error, options);
+        navigator.geolocation.watchPosition(showPosition, error, options);
     } else {
         document.getElementById('info').innerHTML = '<br/>Twoja przeglądarka lub urządzenie nie obsługuje funkcji lokalizacji &#x1F62D'
     };
