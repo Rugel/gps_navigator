@@ -79,42 +79,32 @@ let distance = function (p1, p2) {
     return radius * c;
 }
 
+const result = document.getElementById('h3');
+
+const options = {
+    enableHighAccuracy: true,
+    timeout: 8000,
+    maximumAge: 0
+};
+
 function error(err) {
     console.warn(`ERROR(${err.code}): ${err.message}`);
     document.getElementById('info').innerHTML = `<br/>wystąpił błąd nr ${err.code} : <span style="color:red">${err.message}</span>`
 };
 
-if (navigator.geolocation) {
-    navigator.geolocation.watchPosition(position=>console.log(position), error);
-} else {
-    document.getElementById('info').innerHTML = '<br/>Twoja przeglądarka lub urządzenie nie obsługuje funkcji lokalizacji &#x1F62D'
-};
-
-
-const result = document.getElementById('h3');
-
 //lokalizacja 
 function lokalizuj() {
 
-    const options = {
-        enableHighAccuracy: true,
-        timeout: 8000,
-        maximumAge: 1000
-    };
-
-   
-
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, error, options);
+        navigator.geolocation.watchPosition(showPosition, error, options);
     } else {
         document.getElementById('info').innerHTML = '<br/>Twoja przeglądarka lub urządzenie nie obsługuje funkcji lokalizacji &#x1F62D'
     };
-
+let polyline;
     //callback
     function showPosition(position) {
         let point1;
         let point2;
-        //pomiary po zlokalizowaniu użytkownika
         let total = 0;
         let x = position.coords.latitude;
         let y = position.coords.longitude;
@@ -127,18 +117,20 @@ function lokalizuj() {
             document.getElementById('odczyt').innerHTML = subline_length;
         } 
         else {
+            if(polyline){polyline=null};
             point1 = { latitude: latlonP[0][1], longitude: latlonP[0][0] };
             point2 = { latitude: x, longitude: y };
             total = distance(point1, point2).toFixed(3);
             result.style.color = 'red';
             result.innerHTML = `odczyt spoza zakresu budowy - odległość do punktu km 0 + 000 wynosi: <mark><b>${total}</b></mark> km`;
             result.style.fontSize = '26px';
-            const polyline = L.polyline([[x, y], [(latlonL[0][1] + latlonP[0][1]) / 2, (latlonL[0][0] + latlonP[0][0]) / 2]], { color: "orange", weight: 1 }).addTo(map);
+            polyline = L.polyline([[x, y], [(latlonL[0][1] + latlonP[0][1]) / 2, (latlonL[0][0] + latlonP[0][0]) / 2]], { color: "orange", weight: 1 }).addTo(map);
             var deco = L.polylineDecorator(polyline, {
                 patterns: [
                     { offset: 70, repeat: 80, symbol: L.Symbol.arrowHead({ pixelSize: 20, pathOptions: { fillOpacity: .5, color: 'orange', weight: 0 } }) }
                 ]
             }).addTo(map);
+            console.log(polyline);
         }
         document.getElementById('dok').innerHTML = accu;
         map.flyTo([x, y], 18);
