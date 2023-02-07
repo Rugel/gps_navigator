@@ -79,6 +79,18 @@ let distance = function (p1, p2) {
     return radius * c;
 }
 
+function error(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+    document.getElementById('info').innerHTML = `<br/>wystąpił błąd nr ${err.code} : <span style="color:red">${err.message}</span>`
+};
+
+if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(position=>console.log(position), error);
+} else {
+    document.getElementById('info').innerHTML = '<br/>Twoja przeglądarka lub urządzenie nie obsługuje funkcji lokalizacji &#x1F62D'
+};
+
+
 const result = document.getElementById('h3');
 
 //lokalizacja 
@@ -90,10 +102,7 @@ function lokalizuj() {
         maximumAge: 1000
     };
 
-    function error(err) {
-        console.warn(`ERROR(${err.code}): ${err.message}`);
-        document.getElementById('info').innerHTML = `<br/>wystąpił błąd nr ${err.code} : <span style="color:red">${err.message}</span>`
-    };
+   
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, error, options);
@@ -112,7 +121,7 @@ function lokalizuj() {
         let accu = position.coords.accuracy.toFixed(2);
         
 
-        if (x <= latlonP[0][1] + 0.02 && x >= latlonP[latlonP.length - 1][1] - 0.02 && y >= latlonP[0][0] - 0.02 && y <= latlonP[latlonP.length - 1][0] + 0.02) {
+        if (x<= latlonP[0][1] + 0.02 && x >= latlonP[latlonP.length - 1][1] - 0.02 && y >= latlonP[0][0] - 0.02 && y <= latlonP[latlonP.length - 1][0] + 0.02) {
 
             let subline_length = lineLenth(x, y);
             document.getElementById('odczyt').innerHTML = subline_length;
