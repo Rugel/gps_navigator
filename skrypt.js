@@ -100,7 +100,7 @@ function lokalizuj() {
     } else {
         document.getElementById('info').innerHTML = '<br/>Twoja przeglądarka lub urządzenie nie obsługuje funkcji lokalizacji &#x1F62D'
     };
-let polyline;
+    let polyline;
     //callback
     function showPosition(position) {
         let point1;
@@ -109,15 +109,17 @@ let polyline;
         let x = position.coords.latitude;
         let y = position.coords.longitude;
         let accu = position.coords.accuracy.toFixed(2);
-        
 
-        if (x<= latlonP[0][1] + 0.02 && x >= latlonP[latlonP.length - 1][1] - 0.02 && y >= latlonP[0][0] - 0.02 && y <= latlonP[latlonP.length - 1][0] + 0.02) {
+
+        if (x <= latlonP[0][1] + 0.02 && x >= latlonP[latlonP.length - 1][1] - 0.02 && y >= latlonP[0][0] - 0.02 && y <= latlonP[latlonP.length - 1][0] + 0.02) {
 
             let subline_length = lineLenth(x, y);
             document.getElementById('odczyt').innerHTML = subline_length;
-        } 
+        }
         else {
-            if(polyline){polyline=null};
+
+            if (polyline) { map.removeLayer(polyline) };
+            console.log(polyline);
             point1 = { latitude: latlonP[0][1], longitude: latlonP[0][0] };
             point2 = { latitude: x, longitude: y };
             total = distance(point1, point2).toFixed(3);
@@ -125,20 +127,21 @@ let polyline;
             result.innerHTML = `odczyt spoza zakresu budowy - odległość do punktu km 0 + 000 wynosi: <mark><b>${total}</b></mark> km`;
             result.style.fontSize = '26px';
             polyline = L.polyline([[x, y], [(latlonL[0][1] + latlonP[0][1]) / 2, (latlonL[0][0] + latlonP[0][0]) / 2]], { color: "orange", weight: 1 }).addTo(map);
+            map.removeLayer(polyline);
             var deco = L.polylineDecorator(polyline, {
                 patterns: [
                     { offset: 70, repeat: 80, symbol: L.Symbol.arrowHead({ pixelSize: 20, pathOptions: { fillOpacity: .5, color: 'orange', weight: 0 } }) }
                 ]
             }).addTo(map);
-            console.log(polyline);
+
         }
         document.getElementById('dok').innerHTML = accu;
         map.flyTo([x, y], 18);
-        let marker = L.circle([x, y]).addTo(map).bindPopup("<b>aktualna lokalizacja<b/>"); 
+        let marker = L.circle([x, y]).addTo(map).bindPopup("<b>aktualna lokalizacja<b/>");
     }
-   
-   
-    
+
+
+
 };
 
 //lokalizacja po kiknięciu
@@ -146,10 +149,11 @@ map.on('click', function (e) {
     var popLocation = e.latlng;
     let x = popLocation.lat;
     let y = popLocation.lng;
-    if(x <= latlonP[0][1] + 0.02 && x >= latlonP[latlonP.length - 1][1] - 0.02 && y >= latlonP[0][0] - 0.02 && y <= latlonP[latlonP.length - 1][0] + 0.02){
-    let subline_length = lineLenth(x, y);
-    var popup = L.popup()
-        .setLatLng(popLocation)
-        .setContent(`zapis na osi</br>km ${subline_length}`)
-        .openOn(map)};
+    if (x <= latlonP[0][1] + 0.02 && x >= latlonP[latlonP.length - 1][1] - 0.02 && y >= latlonP[0][0] - 0.02 && y <= latlonP[latlonP.length - 1][0] + 0.02) {
+        let subline_length = lineLenth(x, y);
+        var popup = L.popup()
+            .setLatLng(popLocation)
+            .setContent(`zapis na osi</br>km ${subline_length}`)
+            .openOn(map)
+    };
 });
