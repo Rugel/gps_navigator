@@ -101,6 +101,8 @@ function lokalizuj() {
         document.getElementById('info').innerHTML = '<br/>Twoja przeglądarka lub urządzenie nie obsługuje funkcji lokalizacji &#x1F62D'
     };
     let polyline;
+    let deco;
+    let circle;
     //callback
     function showPosition(position) {
         let point1;
@@ -127,7 +129,8 @@ function lokalizuj() {
             result.style.fontSize = '26px';
             if (polyline) { map.removeLayer(polyline) };
             polyline = L.polyline([[x, y], [(latlonL[0][1] + latlonP[0][1]) / 2, (latlonL[0][0] + latlonP[0][0]) / 2]], { color: "orange", weight: 1 }).addTo(map);
-            var deco = L.polylineDecorator(polyline, {
+            if (deco) { map.removeLayer(deco) };
+            deco = L.polylineDecorator(polyline, {
                 patterns: [
                     { offset: 70, repeat: 80, symbol: L.Symbol.arrowHead({ pixelSize: 20, pathOptions: { fillOpacity: .5, color: 'orange', weight: 0 } }) }
                 ]
@@ -136,7 +139,8 @@ function lokalizuj() {
         }
         document.getElementById('dok').innerHTML = accu;
         map.flyTo([x, y], 18);
-        let marker = L.circle([x, y]).addTo(map).bindPopup("<b>aktualna lokalizacja<b/>");
+        if (circle) { map.removeLayer(circle) };
+        circle = L.circle([x, y]).addTo(map).bindPopup("<b>aktualna lokalizacja<b/>");
     }
 
 
