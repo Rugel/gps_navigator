@@ -111,21 +111,21 @@ function start() {
         let x = position.coords.latitude;
         let y = position.coords.longitude;
         let accu = position.coords.accuracy.toFixed(2);
-
+        let subline_length;
 
         if (x <= latlonP[0][1] + 0.02 && x >= latlonP[latlonP.length - 1][1] - 0.02 && y >= latlonP[0][0] - 0.02 && y <= latlonP[latlonP.length - 1][0] + 0.02) {
 
-            let subline_length = lineLenth(x, y);
+            subline_length = lineLenth(x, y);
             document.getElementById('odczyt').innerHTML = subline_length;
         }
         else {
-           
-           // console.log(polyline);
+
+            // console.log(polyline);
             point1 = { latitude: latlonP[0][1], longitude: latlonP[0][0] };
             point2 = { latitude: x, longitude: y };
             total = distance(point1, point2).toFixed(3);
             result.style.color = 'red';
-            result.innerHTML = `odczyt spoza zakresu budowy - odległość do punktu km 0 + 000 wynosi: <mark><b>${total}</b></mark> km`;
+            result.innerHTML = `odczyt spoza zakresu terenu budowy - odległość do punktu km 0 + 000 wynosi: <mark><b>${total}</b></mark> km`;
             result.style.fontSize = '26px';
             if (polyline) { map.removeLayer(polyline) };
             polyline = L.polyline([[x, y], [(latlonL[0][1] + latlonP[0][1]) / 2, (latlonL[0][0] + latlonP[0][0]) / 2]], { color: "orange", weight: 1 }).addTo(map);
@@ -140,7 +140,7 @@ function start() {
         document.getElementById('dok').innerHTML = accu;
         map.flyTo([x, y], 18);
         if (circle) { map.removeLayer(circle) };
-        circle = L.circle([x, y]).addTo(map).bindPopup("<b>aktualna lokalizacja<b/>");
+        circle = L.circle([x, y]).addTo(map).bindPopup(subline_length ? 'km ' + subline_length : total + ' km');
     }
 
 
@@ -149,8 +149,8 @@ function start() {
 
 let id;
 
-function stop(){
-navigator.geolocation.clearWatch(id);
+function stop() {
+    navigator.geolocation.clearWatch(id);
 }
 
 //lokalizacja po kiknięciu
