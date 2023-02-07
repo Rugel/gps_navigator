@@ -22,12 +22,13 @@
     margin: 10px;
 }
 
-button {
+.button {
     padding: 20px;
-    margin: 35px;
+    margin: 30px;
     font-weight: 900;
     font-size: large;
     cursor: pointer;
+    color: #3f8efe;
 }
 
 #odczyt,

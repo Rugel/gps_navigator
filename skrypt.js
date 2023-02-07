@@ -93,10 +93,10 @@ function error(err) {
 };
 
 //lokalizacja 
-function lokalizuj() {
+function start() {
 
     if (navigator.geolocation) {
-        navigator.geolocation.watchPosition(showPosition, error, options);
+        id = navigator.geolocation.watchPosition(showPosition, error, options);
     } else {
         document.getElementById('info').innerHTML = '<br/>Twoja przeglądarka lub urządzenie nie obsługuje funkcji lokalizacji &#x1F62D'
     };
@@ -146,6 +146,12 @@ function lokalizuj() {
 
 
 };
+
+let id;
+
+function stop(){
+navigator.geolocation.clearWatch(id);
+}
 
 //lokalizacja po kiknięciu
 map.on('click', function (e) {
