@@ -145,9 +145,10 @@ map.on('click', function (e) {
     var popLocation = e.latlng;
     let x = popLocation.lat;
     let y = popLocation.lng;
+    if(x <= latlonP[0][1] + 0.02 && x >= latlonP[latlonP.length - 1][1] - 0.02 && y >= latlonP[0][0] - 0.02 && y <= latlonP[latlonP.length - 1][0] + 0.02){
     let subline_length = lineLenth(x, y);
     var popup = L.popup()
         .setLatLng(popLocation)
         .setContent(`zapis na osi</br>km ${subline_length}`)
-        .openOn(map);
+        .openOn(map)};
 });
