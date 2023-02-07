@@ -117,7 +117,7 @@ function lokalizuj() {
             document.getElementById('odczyt').innerHTML = subline_length;
         }
         else {
-            if (polyline) { map.removeLayer(polyline) };
+           
            // console.log(polyline);
             point1 = { latitude: latlonP[0][1], longitude: latlonP[0][0] };
             point2 = { latitude: x, longitude: y };
@@ -125,6 +125,7 @@ function lokalizuj() {
             result.style.color = 'red';
             result.innerHTML = `odczyt spoza zakresu budowy - odległość do punktu km 0 + 000 wynosi: <mark><b>${total}</b></mark> km`;
             result.style.fontSize = '26px';
+            if (polyline) { map.removeLayer(polyline) };
             polyline = L.polyline([[x, y], [(latlonL[0][1] + latlonP[0][1]) / 2, (latlonL[0][0] + latlonP[0][0]) / 2]], { color: "orange", weight: 1 }).addTo(map);
             var deco = L.polylineDecorator(polyline, {
                 patterns: [
