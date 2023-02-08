@@ -22,13 +22,19 @@
     margin: 10px;
 }
 
-.button {
+.start, .stop {
     padding: 20px;
     margin: 30px;
     font-weight: 900;
     font-size: large;
     cursor: pointer;
-    color: #3f8efe;
+    color: green;
+    width: 10em;
+    font-size: 2rem;
+}
+
+.stop{
+    color: red;
 }
 
 #odczyt,

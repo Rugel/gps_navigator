@@ -80,10 +80,11 @@ let distance = function (p1, p2) {
 }
 
 const result = document.getElementById('h3');
+const button = document.getElementById('button');
 
 const options = {
     enableHighAccuracy: true,
-    timeout: 8000,
+    timeout: 5000,
     maximumAge: 0
 };
 
@@ -94,7 +95,7 @@ function error(err) {
 
 //lokalizacja 
 function start() {
-
+button.innerHTML = '<button class="stop" onclick="stop()">STOP!</button>';
     if (navigator.geolocation) {
         id = navigator.geolocation.watchPosition(showPosition, error, options);
     } else {
@@ -103,6 +104,7 @@ function start() {
     let polyline;
     let deco;
     let circle;
+
     //callback
     function showPosition(position) {
         let point1;
@@ -119,8 +121,6 @@ function start() {
             document.getElementById('odczyt').innerHTML = subline_length;
         }
         else {
-
-            // console.log(polyline);
             point1 = { latitude: latlonP[0][1], longitude: latlonP[0][0] };
             point2 = { latitude: x, longitude: y };
             total = distance(point1, point2).toFixed(3);
@@ -150,6 +150,7 @@ function start() {
 let id;
 
 function stop() {
+    button.innerHTML = '<button class="start" onclick="start()">START</button>';
     navigator.geolocation.clearWatch(id);
 }
 
