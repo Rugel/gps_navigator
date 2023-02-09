@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    touch-action: manipulation;
+    touch-action: none;
 }
 
 #contener {
@@ -24,6 +24,10 @@
     margin: 10px;
 }
 
+.header{
+    text-shadow: 3px 5px 10px;
+}
+
 .start,
 .stop {
     color: #fff;
@@ -43,7 +47,8 @@
 }
 
 #odczyt,
-#dok, .stop {
+#dok,
+.stop {
     color: red;
 }
 
