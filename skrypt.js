@@ -95,7 +95,7 @@ function error(err) {
 
 //lokalizacja 
 function start() {
-button.innerHTML = '<button class="stop" onclick="stop()">STOP!</button>';
+button.innerHTML = '<button class="stop" onclick="stop()">STOP</button>';
     if (navigator.geolocation) {
         id = navigator.geolocation.watchPosition(showPosition, error, options);
     } else {
