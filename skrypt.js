@@ -27,7 +27,7 @@ function lineLenth(latitude, longitude) {
     subline_length = subline_length.toFixed(3);
     subline_length = subline_length.toString().replace('.', ' + ');
     let popCon = `km ${subline_length}`;
-    L.circleMarker([latMid, lngMid], { color: '#2dabab', radius: 5, fillOpacity: 1 }).addTo(map).bindPopup(`<b>${popCon}</b>`).openPopup();
+    L.circleMarker([latMid, lngMid], { color: '#2dabab', radius: 10, fillOpacity: 1 }).addTo(map).bindPopup(`<b>${popCon}</b>`).openPopup();
     return subline_length;
 }
 
