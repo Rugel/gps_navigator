@@ -40,7 +40,7 @@
     font-size: 24px;
     border: 0;
     user-select: none;
-    cursor: pointer;
+    cursor: grab;
     margin: 2rem;
     width: 10rem;
     letter-spacing: 2px;
@@ -66,9 +66,10 @@
 
 mark {
     background-color: red;
-    opacity: 0.85;
+    opacity: 0.8;
     color: white;
-    padding: 0 20px 0 20px;
+    padding: 0 5px ;
+    letter-spacing: 3px;
 }
 
 #footer {
