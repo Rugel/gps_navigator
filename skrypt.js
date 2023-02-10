@@ -27,7 +27,7 @@ function lineLenth(latitude, longitude) {
     subline_length = subline_length.toFixed(3);
     subline_length = subline_length.toString().replace('.', ' + ');
     let popCon = `km ${subline_length}`;
-    L.marker([latMid, lngMid]).addTo(map).bindPopup(`<b>${popCon}</b>`).openPopup();
+    L.circleMarker([latMid, lngMid], { color: '#2dabab', radius: 5, fillOpacity: 1 }).addTo(map).bindPopup(`<b>${popCon}</b>`).openPopup();
     return subline_length;
 }
 
@@ -95,7 +95,7 @@ function error(err) {
 
 //lokalizacja 
 function start() {
-button.innerHTML = '<button class="stop" onclick="stop()">STOP</button>';
+    button.innerHTML = '<button class="stop" onclick="stop()">STOP</button>';
     if (navigator.geolocation) {
         id = navigator.geolocation.watchPosition(showPosition, error, options);
     } else {
@@ -140,7 +140,7 @@ button.innerHTML = '<button class="stop" onclick="stop()">STOP</button>';
         document.getElementById('dok').innerHTML = accu;
         map.flyTo([x, y], 18);
         if (circle) { map.removeLayer(circle) };
-        circle = L.circle([x, y]).addTo(map).bindPopup(subline_length ? 'km ' + subline_length : total + ' km');
+        circle = L.circleMarker([x, y], { color: '#2dabab', fillOpacity: .2 }).addTo(map).bindPopup(subline_length ? 'km ' + subline_length : total + ' km');
     }
 
 
@@ -163,7 +163,7 @@ map.on('click', function (e) {
         let subline_length = lineLenth(x, y);
         var popup = L.popup()
             .setLatLng(popLocation)
-            .setContent(`zapis na osi</br>km ${subline_length}`)
+            .setContent(`zapis w osi</br>km ${subline_length}`)
             .openOn(map)
     };
 });
