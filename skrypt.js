@@ -8,9 +8,33 @@ latlonL.reverse();
 
 //dodanie mapy
 var map = L.map('map').setView([52.1713402, 22.1844079], 12);
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+
+let sat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+    maxZoom: 20,
+    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+})
+
+let str = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+    maxZoom: 20,
+    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+})
+
+let osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+});
+
+osm.addTo(map);
+
+document.querySelectorAll('input[name="map"]').forEach((elem) => {
+    elem.addEventListener("change", function (event) {
+        var tLayer = event.target.value;
+        console.log(tLayer);
+        if (tLayer === 'sat') { map.removeLayer(osm) && map.removeLayer(str); sat.addTo(map) };
+        if (tLayer === 'str') { map.removeLayer(sat) && map.removeLayer(osm); str.addTo(map) };
+        if (tLayer === 'osm') { map.removeLayer(sat) && map.removeLayer(str); osm.addTo(map) };
+    });
+});
+
 
 //funkcja licząca długość wycinka lini 
 function lineLenth(latitude, longitude) {

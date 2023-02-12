@@ -21,7 +21,7 @@
     height: 350px;
     text-align: center;
     font-weight: bold;
-    font-size: 32px;
+    font-size: 30px;
     margin: 10px;
 }
 
@@ -42,7 +42,7 @@
     border: 0;
     user-select: none;
     cursor: grab;
-    margin: 2rem;
+    margin: .5rem;
     width: 10rem;
     letter-spacing: 2px;
 }
@@ -85,3 +85,18 @@ mark {
     letter-spacing: 3px;
     height: 2.5rem;
 }
+
+.view{
+    font-size: 1rem;
+    padding: 10px;
+    word-spacing: 5px;
+}
+
+[type="radio"]{
+    margin-left: 1rem;
+}
+
+fieldset {
+    background-color: #eeeeee;
+    border: 3px solid ;
+  }
