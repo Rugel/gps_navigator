@@ -28,7 +28,6 @@ osm.addTo(map);
 document.querySelectorAll('input[name="map"]').forEach((elem) => {
     elem.addEventListener("change", function (event) {
         var tLayer = event.target.value;
-        console.log(tLayer);
         if (tLayer === 'sat') { map.removeLayer(osm) && map.removeLayer(str); sat.addTo(map) };
         if (tLayer === 'str') { map.removeLayer(sat) && map.removeLayer(osm); str.addTo(map) };
         if (tLayer === 'osm') { map.removeLayer(sat) && map.removeLayer(str); osm.addTo(map) };
