@@ -164,7 +164,7 @@ function start() {
         }
         document.getElementById('dok').innerHTML = accu;
         map.flyTo([x, y], 18);
-        //  circle ? map.removeLayer(circle) : null;
+        circle ? map.removeLayer(circle) : null;
         circle = L.circleMarker([x, y], { color: '#2dabab', fillOpacity: .2 }).addTo(map).bindPopup(subline_length ? 'km ' + subline_length : total + ' km');
     }
 
