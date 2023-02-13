@@ -149,7 +149,7 @@ function start() {
             total = distance(point1, point2).toFixed(3);
             result.style.color = 'red';
             result.innerHTML = `odczyt spoza zakresu terenu budowy - odległość do punktu km 0 + 000 wynosi: <mark><b>${total}</b></mark> km`;
-            result.style.fontSize = '26px';
+            result.style.fontSize = '1.5rem';
             if (polyline) { map.removeLayer(polyline) };
             polyline = L.polyline([[x, y], [(latlonL[0][1] + latlonP[0][1]) / 2, (latlonL[0][0] + latlonP[0][0]) / 2]], { color: "orange", weight: 1 }).addTo(map);
             if (deco) { map.removeLayer(deco) };
