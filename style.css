@@ -43,7 +43,7 @@
     border: 0;
     user-select: none;
     cursor: grab;
-    margin: 1.2rem;
+    margin: 1.7rem;
     width: 10rem;
     letter-spacing: 2px;
 }
@@ -97,19 +97,19 @@ mark {
 
 fieldset {
     background-color: #f2efe9;
-    border: 1px solid;
     font-size: 1rem;
-    padding:  10px;
+    padding: 10px 0 20px 0;
     border-radius: 10px;
-
+    box-shadow: inset 0px 0px 20px #bbb;
+    border: 0;
 }
 
 legend{
-    background-color: lightgrey;
-    border: 1px double;
-    padding: 5px;
+    background-color: white;
+    order: 1px solid;
+    padding: 5px 15px 5px 15px;
     font-size: .8rem;
     font-weight: 400;
-    box-shadow: 1px 2px 5px;
+    box-shadow: inset 0px 0px 15px #c8c8c8;
     border-radius: 5px;
 }
