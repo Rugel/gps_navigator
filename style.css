@@ -73,7 +73,7 @@ mark {
     color: white;
     padding: 0 5px;
     letter-spacing: 3px;
-    border-radius: 8px;
+    border-radius: 6px;
 }
 
 #footer {
@@ -108,7 +108,8 @@ legend{
     background-color: lightgrey;
     border: 1px double;
     padding: 5px;
-    font-size: .7rem;
+    font-size: .8rem;
+    font-weight: 400;
     box-shadow: 1px 2px 5px;
     border-radius: 5px;
 }
