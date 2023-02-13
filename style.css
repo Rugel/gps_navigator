@@ -113,6 +113,7 @@ legend{
     font-weight: 400;
     box-shadow: inset 0px 0px 15px #c8c8c8;
     border-radius: 5px;
+    letter-spacing: 3px;
 }
 
 label{
