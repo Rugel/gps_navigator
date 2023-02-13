@@ -96,7 +96,7 @@ mark {
 }
 
 fieldset {
-    background-color: #f2efe9;
+    background-color: rgba(242, 239, 233, .2);
     font-size: 1rem;
     padding: 10px 0 20px 0;
     border-radius: 10px;
@@ -112,4 +112,8 @@ legend{
     font-weight: 400;
     box-shadow: inset 0px 0px 15px #c8c8c8;
     border-radius: 5px;
+}
+
+label{
+    margin-right: 1rem;
 }
