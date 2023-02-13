@@ -116,6 +116,10 @@ function error(err) {
     document.getElementById('info').innerHTML = `<br/>wystąpił błąd nr ${err.code} : <span style="color:red">${err.message}</span>`
 };
 
+let polyline;
+    let deco;
+    let circle;
+
 //lokalizacja 
 function start() {
     button.innerHTML = '<button class="stop" onclick="stop()">STOP</button>';
@@ -124,9 +128,7 @@ function start() {
     } else {
         document.getElementById('info').innerHTML = '<br/>Twoja przeglądarka lub urządzenie nie obsługuje funkcji lokalizacji &#x1F62D'
     };
-    let polyline;
-    let deco;
-    let circle;
+    
 
     //callback
     function showPosition(position) {
@@ -150,9 +152,9 @@ function start() {
             result.style.color = 'red';
             result.innerHTML = `odczyt spoza zakresu terenu budowy - odległość do punktu km 0 + 000 wynosi: <mark><b>${total}</b></mark> km`;
             result.style.fontSize = '1.5rem';
-            if (polyline) { map.removeLayer(polyline) };
+            polyline ? map.removeLayer(polyline):null;
             polyline = L.polyline([[x, y], [(latlonL[0][1] + latlonP[0][1]) / 2, (latlonL[0][0] + latlonP[0][0]) / 2]], { color: "orange", weight: 1 }).addTo(map);
-            if (deco) { map.removeLayer(deco) };
+            deco ? map.removeLayer(deco) : null;
             deco = L.polylineDecorator(polyline, {
                 patterns: [
                     { offset: 70, repeat: 80, symbol: L.Symbol.arrowHead({ pixelSize: 20, pathOptions: { fillOpacity: .5, color: 'orange', weight: 0 } }) }
@@ -162,7 +164,7 @@ function start() {
         }
         document.getElementById('dok').innerHTML = accu;
         map.flyTo([x, y], 18);
-        if (circle) { map.removeLayer(circle) };
+        circle ? map.removeLayer(circle) : null;
         circle = L.circleMarker([x, y], { color: '#2dabab', fillOpacity: .2 }).addTo(map).bindPopup(subline_length ? 'km ' + subline_length : total + ' km');
     }
 
@@ -173,6 +175,8 @@ function start() {
 let id;
 
 function stop() {
+    polyline ? map.removeLayer(polyline):null;
+    deco ? map.removeLayer(deco) : null;
     button.innerHTML = '<button class="start" onclick="start()">START</button>';
     navigator.geolocation.clearWatch(id);
 }
