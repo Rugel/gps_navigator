@@ -6,7 +6,7 @@
     touch-action: manipulation;
 }
 
-#contener {
+.contener {
     background-image: url(./background.png);
     position: relative;
     display: flex;
@@ -64,7 +64,7 @@
     width: 600px;
     height: 600px;
     margin: 0 10px 0 10px;
-    flex-grow: 1.5;
+    flex-grow: 10;
     border: 1px solid;
 }
 
@@ -91,7 +91,7 @@ mark {
 }
 
 [type="radio"] {
-    margin-left: 5%;
+    margin-left: 3%;
     cursor: pointer;
 
 }
@@ -103,6 +103,11 @@ fieldset {
     border-radius: 10px;
     box-shadow: inset 0px 0px 20px #bbb;
     border: 0;
+    max-width: 600px;
+    left: 0;
+    right: 0;
+    margin: auto;
+
 }
 
 legend{
@@ -117,5 +122,5 @@ legend{
 }
 
 label{
-    margin-right: 5%;
+    margin-right: 3%;
 }
