@@ -166,10 +166,25 @@ function start() {
         map.flyTo([x, y], 18);
         circle ? map.removeLayer(circle) : null;
         circle = L.circleMarker([x, y], { color: '#2dabab', fillOpacity: .2 }).addTo(map).bindPopup(subline_length ? 'km ' + subline_length : total + ' km');
+
+        //proj4
+
+        // Zdefiniowanie systemów odniesienia współrzędnych
+        proj4.defs("EPSG:4326", "+proj=longlat +datum=WGS84 +no_defs");
+        proj4.defs("EPSG:2180", "+proj=tmerc +lat_0=0 +lon_0=19 +k=0.9993 +x_0=500000 +y_0=-5300000 +ellps=GRS80 +units=m +no_defs");
+
+        // Funkcja przekształcająca współrzędne z GPS na PL-1992
+        function gpsToPl1992(longitude, latitude) {
+            const gpsCoords = [longitude, latitude];
+            const pl1992Coords = proj4("EPSG:4326", "EPSG:2180", gpsCoords); // Poprawienie tego fragmentu
+            return pl1992Coords;
+        }
+        const pl1992Coords = gpsToPl1992(y, x);
+        const x1992 = pl1992Coords[0];
+        const y1992 = pl1992Coords[1];
+        const geoLink = `<a href="https://mapy.geoportal.gov.pl/mobile/#zoom&x=${x1992}&y=${y1992}&minLevel=18&gpsPosition=true&1677663465149" target="blank">Więcej danych na mapie Geoportal</a>`;
+        document.getElementById('link').innerHTML = geoLink;
     }
-
-
-
 };
 
 let id;
