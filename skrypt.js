@@ -35,6 +35,7 @@ document.querySelectorAll('input[name="map"]').forEach((elem) => {
 
 
 //funkcja licząca długość wycinka lini 
+let pointC;
 function lineLenth(latitude, longitude) {
     var point = L.latLng(latitude, longitude);
     var closestPointL = L.GeometryUtil.closest(map, pointsLineL, point);
@@ -48,8 +49,9 @@ function lineLenth(latitude, longitude) {
     subline_length = subline_length * 1.00293;
     subline_length = subline_length.toFixed(3);
     subline_length = subline_length.toString().replace('.', ' + ');
-    let popCon = `km ${subline_length}`;
-    L.circleMarker([latMid, lngMid], { color: '#2dabab', radius: 10, fillOpacity: 1 }).addTo(map).bindPopup(`<b>${popCon}</b>`).openPopup();
+    let popCon = `<a href=https://www.google.com/maps?q=${latMid},${lngMid} target=blank>km ${subline_length}</a>`;
+    pointC ? map.removeLayer(pointC) : null;
+    pointC = L.circleMarker([latMid, lngMid], { color: '#2dabab', radius: 10, fillOpacity: 1 }).addTo(map).bindPopup(`<b>${popCon}</b>`);
     return subline_length;
 }
 
@@ -58,14 +60,18 @@ var bounds = [[52.2027456, 22.1144492], [52.1399348, 22.2543665]];
 L.rectangle(bounds, { color: 'blue', weight: 2, fillOpacity: 0 }).addTo(map);
 
 //dodanie markerów do mapy
+
 var office = L.marker([52.18811286436958, 22.147333469408157]).addTo(map);
-office.bindPopup("<b>Biuro Budowy A2</b><br/> odc.V POLAQUA").openPopup();
+office.bindPopup("<a href='https://www.google.com/maps?q=52.18811286436958,22.147333469408157' target='blank'>Biuro Budowy A2<br/>odc.V POLAQUA</a>");
+
+var wmb = L.marker([52.176402,22.155184]).addTo(map);
+wmb.bindPopup("<a href='https://www.google.com/maps?q=52.176402,22.155184' target='blank'>WMB POLAQUA</a>");
 
 var km12 = L.marker([(latlonL[latlonL.length - 1][0] + latlonP[latlonP.length - 1][0]) / 2, (latlonL[latlonL.length - 1][1] + latlonP[latlonP.length - 1][1]) / 2]).addTo(map);
-km12.bindPopup('<b>koniec odcinka</b><br/>km 12 + 489').openPopup();
+km12.bindPopup(`<a href='https://www.google.com/maps?q=${(latlonL[latlonL.length - 1][0] + latlonP[latlonP.length - 1][0]) / 2},${(latlonL[latlonL.length - 1][1] + latlonP[latlonP.length - 1][1]) / 2}' target='blank'>koniec odcinka<br/>km 12 + 489</a>`);
 
 var km0 = L.marker([(latlonL[0][0] + latlonP[0][0]) / 2, (latlonL[0][1] + latlonP[0][1]) / 2]).addTo(map);
-km0.bindPopup('<b>początek odcinka</b><br/>km 0 + 000').openPopup();
+km0.bindPopup(`<a href='https://www.google.com/maps?q=${(latlonL[0][0] + latlonP[0][0]) / 2},${(latlonL[0][1] + latlonP[0][1]) / 2}' target='blank'>początek odcinka<br/>km 0 + 000</a>`);
 
 map.addControl(new L.Control.Fullscreen({
     title: {
