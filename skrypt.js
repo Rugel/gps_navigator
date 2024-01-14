@@ -8,7 +8,7 @@ latlonL.reverse();
 //dodanie mapy
 var map = L.map('map').setView([52.1713402, 22.1844079], 12);
 
-let sat = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+let sat = L.tileLayer('https://{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
     maxZoom: 20,
     subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
 })
